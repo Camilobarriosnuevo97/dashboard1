@@ -26,20 +26,6 @@ fig = px.scatter(df_filtered, x="petal_length", y="petal_width", color="species"
                  title="Distribución de Tamaño de los Pétalos")
 st.plotly_chart(fig)
  
-# Gráfico de radar
-st.subheader("📊 Comparación Promedio por Especie")
-df_radar = df_filtered.groupby("species").mean().reset_index()
-
-# Separamos las características de la especie para que el gráfico de radar pueda tomar las medias
-fig_radar = px.line_polar(df_radar, 
-                          r=df_radar[["sepal_length", "sepal_width", "petal_length", "petal_width"]].mean(axis=0), 
-                          theta=["sepal_length", "sepal_width", "petal_length", "petal_width"],
-                          line_close=True, 
-                          color=df_radar["species"], 
-                          title="Perfil Promedio de Cada Especie")
-# Mostrar gráfico
-st.plotly_chart(fig_radar)
-
 # Tabla de datos interactiva
 st.subheader("📄 Datos Filtrados")
 st.dataframe(df_filtered)
